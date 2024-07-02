@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            background-color: #f5e6ff; /* Lightest violet background color */
+            overflow: hidden; /* Prevent scrollbars */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Ensure children stack vertically */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif; /* Set default font family */
+            color: #333; /* Default text color */
+            position: relative; /* Ensure relative positioning for absolute children */
+        }
+
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Send stars behind other content */
+            pointer-events: none; /* Prevent interaction with stars */
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1%, transparent 1%);
+            background-size: 2px 2px; /* Size of stars */
+        }
+
+        .star {
+            position: absolute;
+            width: 8px; /* Increase size of stars */
+            height: 8px; /* Increase size of stars */
+            background-color: rgba(255, 255, 255, 1); /* Bright white stars */
+            border-radius: 50%; /* Make stars round */
+            animation: starMove linear infinite;
+        }
+
+        @keyframes starMove {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(100vw, 100vh);
+            }
+        }
+
+        .skill-list {
+            display: flex; /* Make the container flexbox */
+            justify-content: center; /* Center items horizontally */
+            align-items: center; /* Center items vertically */
+            margin-top: 20px; /* Add margin at the top */
+            flex-wrap: wrap; /* Allow items to wrap if they exceed container width */
+        }
+
+        .skill-container {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.9); /* White background for skill box with transparency */
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column; /* Align items in a column */
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+            margin: 20px; /* Add margin for space between skill boxes */
+            overflow: hidden; /* Prevent content overflow */
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .skill-info {
+            padding: 20px;
+            color: #333; /* Adjust text color */
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+            max-height: 100%; /* Limit maximum height to parent container */
+        }
+
+        .skill-info h2 {
+            margin-bottom: 10px;
+        }
+
+        .logo a {
+            font-size: 1.5rem; /* Adjust font size as needed */
+            font-weight: bold; /* Optional: Adjust font weight */
+            text-decoration: none; /* Optional: Remove underline */
+            color: #333; /* Adjust color */
+        }
+
+        /* Back button styles */
+        .back-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust to center exactly */
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            z-index: 999; /* Ensure button is above other content */
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+    <title>Skills | Web Design Mastery</title>
+</head>
+<body>
+    <div class="starfield"></div> <!-- Container for stars -->
+    
+    <div class="skill-list">
+        <div class="skill-container">
+            <div class="skill-info">
+                <h2>Coding Skills</h2>
+                <p>Proficient in coding Skills for web development and scripting.</p>
+                <div class="tech-stack">
+                    <b>Languages:</b>
+                    <br>
+                    Java,Basics of C,Python and DSA
+                </div>
+            </div>
+        </div>
+        
+        <div class="skill-container">
+            <div class="skill-info">
+                <h2>Frontend Development</h2>
+                <p>Experience in building responsive and interactive user interfaces using HTML, CSS, and JavaScript.</p>
+                <div class="tech-stack">
+                    <b>Tools & Technologies:</b>
+                    <br>
+                    React, Bootstrap
+                </div>
+            </div>
+        </div>
+        
+        <div class="skill-container">
+            <div class="skill-info">
+                <h2>Database Management</h2>
+                <p>Knowledgeable in designing and managing relational databases.</p>
+                <div class="tech-stack">
+                    <b>Tools & Technologies:</b>
+                    <br>
+                    SQL
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="k.html" class="back-button">Back</a> <!-- Back button -->
+
+    <script>
+        // Create stars dynamically
+        function createStars() {
+            const starCount = 500; // Number of stars
+            const starfield = document.querySelector('.starfield');
+
+            for (let i = 0; i < starCount; i++) {
+                let star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = Math.random() * 100 + 'vh'; // Random position vertically
+                star.style.left = Math.random() * 100 + 'vw'; // Random position horizontally
+                star.style.width = Math.random() * 4 + 4 + 'px'; // Random width between 4px and 8px
+                star.style.height = star.style.width; // Keep stars circular
+                star.style.background = 'rgba(255, 255, 255, 1)'; // Bright white stars
+                star.style.animationDuration = Math.random() * 5 + 5 + 's'; // Random duration between 5s and 10s
+                star.style.animationDelay = Math.random() * 2 + 's'; // Random delay up to 2s
+                starfield.appendChild(star);
+            }
+        }
+
+        // Initialize stars on page load
+        window.onload = function() {
+            createStars();
+        };
+    </script>
+</body>
+</html>
